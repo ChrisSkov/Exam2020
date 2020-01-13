@@ -118,7 +118,7 @@ public class EMF_Creator {
         if (isDeployed) {
             user = System.getenv("USER");
             pw = System.getenv("PW");
-            connection_str = System.getenv("CONNECTION_STR5");
+            connection_str = System.getenv("CONNECTION_STR");
         }
         /*
         On your server in /opt/tomcat/bin/setenv.sh   add the following WITH YOUR OWN VALUES
