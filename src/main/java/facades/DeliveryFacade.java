@@ -29,7 +29,7 @@ import javax.ws.rs.WebApplicationException;
  */
 public class DeliveryFacade implements DeliveryFacadeInterface {
 
-    private static DeliveryFacadeInterface facade;
+    private static DeliveryFacade facade;
     private static EntityManagerFactory emf;
 
     private DeliveryFacade()
@@ -42,7 +42,7 @@ public class DeliveryFacade implements DeliveryFacadeInterface {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static DeliveryFacadeInterface getDeliveryFacade(EntityManagerFactory _emf)
+    public static DeliveryFacade getDeliveryFacade(EntityManagerFactory _emf)
     {
         if (facade == null)
         {
