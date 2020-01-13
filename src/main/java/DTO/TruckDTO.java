@@ -6,6 +6,7 @@
 package DTO;
 
 import entities.Delivery;
+import entities.Driver;
 import entities.Truck;
 import java.util.List;
 import java.util.ArrayList;
@@ -28,10 +29,12 @@ public class TruckDTO {
         this.id = truck.getId();
         this.name = truck.getName();
         this.capacity = truck.getCapacity();
-        truck.getDrivers().forEach((d) -> //lambda expression. can be passed around like an object
+
+        for (Driver d : truck.getDrivers())
         {
             driverList.add(new DriverDTO(d));
-        });
+        }
+
         for (Delivery delivery : truck.getDeliveries())
         {
             deliveryList.add(new DeliveryDTO(delivery));

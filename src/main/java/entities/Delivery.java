@@ -19,12 +19,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author Chris
  */
 @Entity
+@Table(name = "deliveries")
 @NamedQueries(
         {
             @NamedQuery(name = "Delivery.getAll", query = "SELECT d FROM Delivery d"),

@@ -6,6 +6,7 @@
 package entities;
 
 import DTO.DeliveryDTO;
+import DTO.DriverDTO;
 import DTO.TruckDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,12 +21,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Chris
  */
 @Entity
+@Table(name = "trucks")
 @NamedQueries(
         {
             @NamedQuery(name = "Truck.getAll", query = "SELECT t FROM Truck t"),
@@ -67,10 +70,12 @@ public class Truck implements Serializable {
         this.id = truck.getId();
         this.name = truck.getName();
         this.capacity = truck.getCapacity();
-        truck.getDriverList().forEach((d) -> //lambda expression. can be passed around like an object
+
+        for (DriverDTO d : truck.getDriverList())
         {
             drivers.add(new Driver(d));
-        });
+        }
+
         for (DeliveryDTO delivery : truck.getDeliveryList())
         {
             deliveries.add(new Delivery(delivery));

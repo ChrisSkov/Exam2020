@@ -18,12 +18,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author Chris
  */
 @Entity
+@Table(name = "drivers")
 @NamedQueries(
         {
             @NamedQuery(name = "Driver.getAll", query = "SELECT d FROM Driver d"),

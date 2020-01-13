@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import entities.Cargo;
 import entities.Delivery;
 import entities.Truck;
 import java.util.ArrayList;
@@ -33,13 +34,12 @@ public class DeliveryDTO {
         this.shippingDate = delivery.getShippingDate();
         this.fromLocation = delivery.getFromLocation();
         this.destination = delivery.getDestination();
-        delivery.getCargoList().forEach((c) ->
+
+        for (Cargo c : delivery.getCargoList())
         {
             cargoList.add(new CargoDTO(c));
-        });
+        }
     }
-
-  
 
     public Truck getTruck()
     {
@@ -167,7 +167,5 @@ public class DeliveryDTO {
     {
         return "DeliveryDTO{" + "cargoList=" + cargoList + ", id=" + id + ", truck=" + truck + ", shippingDate=" + shippingDate + ", fromLocation=" + fromLocation + ", destination=" + destination + '}';
     }
-
-   
 
 }

@@ -6,6 +6,7 @@
 package DTO;
 
 import entities.Driver;
+import entities.Truck;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,10 +29,10 @@ public class DriverDTO {
     {
         this.id = driver.getId();
         this.name = driver.getName();
-        driver.getTruckList().forEach((t) ->
+        for(Truck t : driver.getTruckList())
         {
             truckList.add(new TruckDTO(t));
-        });
+        }
 
     }
 

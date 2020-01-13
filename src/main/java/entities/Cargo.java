@@ -16,12 +16,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author Chris
  */
 @Entity
+@Table(name = "cargo")
 @NamedQueries(
         {
             @NamedQuery(name = "Cargo.getAll", query = "SELECT c FROM Cargo c"),
@@ -155,11 +157,7 @@ public class Cargo implements Serializable {
         {
             return false;
         }
-        if (!Objects.equals(this.delivery, other.delivery))
-        {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.delivery, other.delivery);
     }
 
     @Override
