@@ -28,7 +28,7 @@ public class DriverDTO {
     {
         this.id = driver.getId();
         this.name = driver.getName();
-        driver.getTrucks().forEach((t) ->
+        driver.getTruckList().forEach((t) ->
         {
             truckList.add(new TruckDTO(t));
         });

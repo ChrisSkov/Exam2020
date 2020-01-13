@@ -5,6 +5,8 @@
  */
 package entities;
 
+import DTO.DriverDTO;
+import DTO.TruckDTO;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +28,7 @@ import javax.persistence.NamedQuery;
 {
     @NamedQuery(name = "Driver.getAll", query = "SELECT d FROM Driver d"),
     @NamedQuery(name = "Driver.getDriverByName", query = "SELECT d FROM Driver d WHERE d.name = :name"),
-    @NamedQuery(name = "Driver.getDriverByTrcuk", query = "SELECT d FROM Driver d JOIN d.trucks t WHERE t.name = :name"),
+    @NamedQuery(name = "Driver.getDriverByTruck", query = "SELECT d FROM Driver d JOIN d.trucks t WHERE t.name = :name"),
     @NamedQuery(name = "Driver.getDriverByID", query = "SELECT d FROM Driver d WHERE d.id = :id")
 })
 public class Driver implements Serializable {
@@ -38,12 +40,25 @@ public class Driver implements Serializable {
     private String name;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Truck> trucks;
+    private List<Truck> truckList;
 
     public Driver(String name, List<Truck> trucks)
     {
         this.name = name;
-        this.trucks = trucks;
+        this.truckList = trucks;
+    }
+    
+      public Driver(DriverDTO driver)
+    {
+        this.id = driver.getId();
+        this.name = driver.getName();
+        for(TruckDTO truck : driver.getTruckList())
+        {
+            truckList.add(new Truck(truck));
+            
+        }
+      
+
     }
 
     public Driver()
@@ -70,14 +85,14 @@ public class Driver implements Serializable {
         this.name = name;
     }
 
-    public List<Truck> getTrucks()
+    public List<Truck> getTruckList()
     {
-        return trucks;
+        return truckList;
     }
 
-    public void setTrucks(List<Truck> trucks)
+    public void setTruckList(List<Truck> truckList)
     {
-        this.trucks = trucks;
+        this.truckList = truckList;
     }
 
     @Override
@@ -86,7 +101,7 @@ public class Driver implements Serializable {
         int hash = 7;
         hash = 23 * hash + Objects.hashCode(this.id);
         hash = 23 * hash + Objects.hashCode(this.name);
-        hash = 23 * hash + Objects.hashCode(this.trucks);
+        hash = 23 * hash + Objects.hashCode(this.truckList);
         return hash;
     }
 
@@ -114,7 +129,7 @@ public class Driver implements Serializable {
         {
             return false;
         }
-        if (!Objects.equals(this.trucks, other.trucks))
+        if (!Objects.equals(this.truckList, other.truckList))
         {
             return false;
         }
@@ -124,7 +139,7 @@ public class Driver implements Serializable {
     @Override
     public String toString()
     {
-        return "Driver{" + "id=" + id + ", name=" + name + ", trucks=" + trucks + '}';
+        return "Driver{" + "id=" + id + ", name=" + name + ", trucks=" + truckList + '}';
     }
 
 }

@@ -21,7 +21,7 @@ public class TruckDTO {
 
     private List<DriverDTO> driverList = new ArrayList();
 
-    TruckDTO(Truck truck)
+    public TruckDTO(Truck truck)
     {
         this.id = truck.getId();
         this.name = truck.getName();

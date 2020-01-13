@@ -5,6 +5,7 @@
  */
 package entities;
 
+import DTO.TruckDTO;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -24,13 +25,13 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries(
-{
-    @NamedQuery(name = "Truck.getAll", query = "SELECT t FROM Truck t"),
-    @NamedQuery(name = "Truck.getTruckByName", query = "SELECT t FROM Truck t WHERE t.name = :name"),
-    @NamedQuery(name = "Truck.getTrcukByDriver", query = "SELECT t FROM Truck t JOIN t.drivers d WHERE d.name = :name"),
-    @NamedQuery(name = "Truck.getTruckByID", query = "SELECT t FROM Truck t WHERE t.id = :id"),
-    @NamedQuery(name = "Truck.getTruckByShippingDate", query = "SELECT t FROM Truck t JOIN t.deliveries d WHERE d.shippingDate = :shippingDate")
-})
+        {
+            @NamedQuery(name = "Truck.getAll", query = "SELECT t FROM Truck t"),
+            @NamedQuery(name = "Truck.getTruckByName", query = "SELECT t FROM Truck t WHERE t.name = :name"),
+            @NamedQuery(name = "Truck.getTruckByDriver", query = "SELECT t FROM Truck t JOIN t.drivers d WHERE d.name = :name"),
+            @NamedQuery(name = "Truck.getTruckByID", query = "SELECT t FROM Truck t WHERE t.id = :id"),
+            @NamedQuery(name = "Truck.getTruckByShippingDate", query = "SELECT t FROM Truck t JOIN t.deliveries d WHERE d.shippingDate = :shippingDate")
+        })
 public class Truck implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,6 +52,17 @@ public class Truck implements Serializable {
         this.capacity = capacity;
         this.drivers = drivers;
         this.deliveries = deliveries;
+    }
+
+    public Truck(TruckDTO truck)
+    {
+        this.id = truck.getId();
+        this.name = truck.getName();
+        this.capacity = truck.getCapacity();
+        truck.getDriverList().forEach((d) -> //lambda expression. can be passed around like an object
+        {
+            drivers.add(new Driver(d));
+        });
     }
 
     public Truck()
