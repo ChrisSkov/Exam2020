@@ -24,15 +24,15 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries(
-{
-    @NamedQuery(name = "Delivery.getAll", query = "SELECT d FROM Delivery d"),
-    @NamedQuery(name = "Delivery.getDeliveryByTruck", query = "SELECT d FROM Delivery d JOIN d.truck t WHERE t.name =:name"),
-    @NamedQuery(name = "Delivery.getDeliveryByDate", query = "SELECT d FROM Delivery d WHERE d.shippingDate = :shippingDate"),
-    @NamedQuery(name = "Delivery.getDeliveryByFromLocation", query = "SELECT d FROM Delivery d WHERE d.fromLocation = :fromLocation"),
-    @NamedQuery(name = "Delivery.getDeliveryByDestination", query = "SELECT d FROM Delivery d WHERE d.destination = :destination"),
-    @NamedQuery(name = "Delivery.getDeliveryByCargo", query = "SELECT d FROM Delivery d WHERE d.cargo = :cargo")
-    
-})
+        {
+            @NamedQuery(name = "Delivery.getAll", query = "SELECT d FROM Delivery d"),
+            @NamedQuery(name = "Delivery.getDeliveryByTruck", query = "SELECT d FROM Delivery d JOIN d.truck t WHERE t.name =:name"),
+            @NamedQuery(name = "Delivery.getDeliveryByDate", query = "SELECT d FROM Delivery d WHERE d.shippingDate = :shippingDate"),
+            @NamedQuery(name = "Delivery.getDeliveryByFromLocation", query = "SELECT d FROM Delivery d WHERE d.fromLocation = :fromLocation"),
+            @NamedQuery(name = "Delivery.getDeliveryByDestination", query = "SELECT d FROM Delivery d WHERE d.destination = :destination"),
+            @NamedQuery(name = "Delivery.getDeliveryByCargo", query = "SELECT d FROM Delivery d WHERE d.cargo = :cargo")
+
+        })
 public class Delivery implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class Delivery implements Serializable {
     private Truck truck;
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Cargo> cargo;
-    
+
     private String shippingDate, fromLocation, destination;
 
     public Delivery()
