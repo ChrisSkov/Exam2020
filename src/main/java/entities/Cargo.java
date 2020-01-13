@@ -5,6 +5,7 @@
  */
 package entities;
 
+import DTO.CargoDTO;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -46,6 +47,16 @@ public class Cargo implements Serializable {
         this.name = name;
         this.weight = weight;
         this.units = units;
+    }
+
+    public Cargo(CargoDTO cargo)
+    {
+        this.delivery = cargo.getDelivery();
+        this.name = cargo.getName();
+        this.weight = cargo.getWeight();
+        this.units = cargo.getUnits();
+        this.id = cargo.getId();
+
     }
 
     public Integer getId()

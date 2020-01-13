@@ -6,6 +6,7 @@
 package DTO;
 
 import entities.Delivery;
+import entities.Truck;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +19,7 @@ public class DeliveryDTO {
 
     private List<CargoDTO> cargoList = new ArrayList();
     private int id;
+    private Truck truck;
     private String shippingDate, fromLocation, destination;
 
     public DeliveryDTO()
@@ -27,13 +29,24 @@ public class DeliveryDTO {
     public DeliveryDTO(Delivery delivery)
     {
         this.id = delivery.getId();
+        this.truck = delivery.getTruck();
         this.shippingDate = delivery.getShippingDate();
         this.fromLocation = delivery.getFromLocation();
         this.destination = delivery.getDestination();
-        delivery.getCargo().forEach((c) ->
+        delivery.getCargoList().forEach((c) ->
         {
             cargoList.add(new CargoDTO(c));
         });
+    }
+
+    public Truck getTruck()
+    {
+        return truck;
+    }
+
+    public void setTruck(Truck truck)
+    {
+        this.truck = truck;
     }
 
     public void addDeliveryDTO(CargoDTO c)
@@ -94,9 +107,10 @@ public class DeliveryDTO {
     @Override
     public int hashCode()
     {
-        int hash = 5;
+        int hash = 3;
         hash = 53 * hash + Objects.hashCode(this.cargoList);
         hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.truck);
         hash = 53 * hash + Objects.hashCode(this.shippingDate);
         hash = 53 * hash + Objects.hashCode(this.fromLocation);
         hash = 53 * hash + Objects.hashCode(this.destination);
@@ -139,13 +153,19 @@ public class DeliveryDTO {
         {
             return false;
         }
+        if (!Objects.equals(this.truck, other.truck))
+        {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString()
     {
-        return "DeliveryDTO{" + "cargoList=" + cargoList + ", id=" + id + ", shippingDate=" + shippingDate + ", fromLocation=" + fromLocation + ", destination=" + destination + '}';
+        return "DeliveryDTO{" + "cargoList=" + cargoList + ", id=" + id + ", truck=" + truck + ", shippingDate=" + shippingDate + ", fromLocation=" + fromLocation + ", destination=" + destination + '}';
     }
+
+   
 
 }

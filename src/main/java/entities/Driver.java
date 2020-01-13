@@ -25,12 +25,12 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries(
-{
-    @NamedQuery(name = "Driver.getAll", query = "SELECT d FROM Driver d"),
-    @NamedQuery(name = "Driver.getDriverByName", query = "SELECT d FROM Driver d WHERE d.name = :name"),
-    @NamedQuery(name = "Driver.getDriverByTruck", query = "SELECT d FROM Driver d JOIN d.trucks t WHERE t.name = :name"),
-    @NamedQuery(name = "Driver.getDriverByID", query = "SELECT d FROM Driver d WHERE d.id = :id")
-})
+        {
+            @NamedQuery(name = "Driver.getAll", query = "SELECT d FROM Driver d"),
+            @NamedQuery(name = "Driver.getDriverByName", query = "SELECT d FROM Driver d WHERE d.name = :name"),
+            @NamedQuery(name = "Driver.getDriverByTruck", query = "SELECT d FROM Driver d JOIN d.truckList t WHERE t.name = :name"),
+            @NamedQuery(name = "Driver.getDriverByID", query = "SELECT d FROM Driver d WHERE d.id = :id")
+        })
 public class Driver implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,17 +47,16 @@ public class Driver implements Serializable {
         this.name = name;
         this.truckList = trucks;
     }
-    
-      public Driver(DriverDTO driver)
+
+    public Driver(DriverDTO driver)
     {
         this.id = driver.getId();
         this.name = driver.getName();
-        for(TruckDTO truck : driver.getTruckList())
+        for (TruckDTO truck : driver.getTruckList())
         {
             truckList.add(new Truck(truck));
-            
+
         }
-      
 
     }
 

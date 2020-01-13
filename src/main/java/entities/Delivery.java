@@ -5,6 +5,8 @@
  */
 package entities;
 
+import DTO.CargoDTO;
+import DTO.DeliveryDTO;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +44,7 @@ public class Delivery implements Serializable {
     @ManyToOne
     private Truck truck;
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Cargo> cargo;
+    private List<Cargo> cargoList;
 
     private String shippingDate, fromLocation, destination;
 
@@ -53,12 +55,25 @@ public class Delivery implements Serializable {
     public Delivery(Truck truck, List<Cargo> cargo, String shippingDate, String fromLocation, String destination)
     {
         this.truck = truck;
-        this.cargo = cargo;
+        this.cargoList = cargo;
         this.shippingDate = shippingDate;
         this.fromLocation = fromLocation;
         this.destination = destination;
     }
 
+      public Delivery(DeliveryDTO delivery)
+    {
+        this.id = delivery.getId();
+        this.truck = delivery.getTruck();
+        this.shippingDate = delivery.getShippingDate();
+        this.fromLocation = delivery.getFromLocation();
+        this.destination = delivery.getDestination();
+       for(CargoDTO cargo : delivery.getCargoList())
+        {
+            cargoList.add(new Cargo(cargo));
+            
+        }
+    }
     public Integer getId()
     {
         return id;
@@ -79,14 +94,14 @@ public class Delivery implements Serializable {
         this.truck = truck;
     }
 
-    public List<Cargo> getCargo()
+    public List<Cargo> getCargoList()
     {
-        return cargo;
+        return cargoList;
     }
 
-    public void setCargo(List<Cargo> cargo)
+    public void setCargoList(List<Cargo> cargoList)
     {
-        this.cargo = cargo;
+        this.cargoList = cargoList;
     }
 
     public String getShippingDate()
@@ -125,7 +140,7 @@ public class Delivery implements Serializable {
         int hash = 3;
         hash = 19 * hash + Objects.hashCode(this.id);
         hash = 19 * hash + Objects.hashCode(this.truck);
-        hash = 19 * hash + Objects.hashCode(this.cargo);
+        hash = 19 * hash + Objects.hashCode(this.cargoList);
         hash = 19 * hash + Objects.hashCode(this.shippingDate);
         hash = 19 * hash + Objects.hashCode(this.fromLocation);
         hash = 19 * hash + Objects.hashCode(this.destination);
@@ -168,7 +183,7 @@ public class Delivery implements Serializable {
         {
             return false;
         }
-        if (!Objects.equals(this.cargo, other.cargo))
+        if (!Objects.equals(this.cargoList, other.cargoList))
         {
             return false;
         }
@@ -178,7 +193,7 @@ public class Delivery implements Serializable {
     @Override
     public String toString()
     {
-        return "Delivery{" + "id=" + id + ", truck=" + truck + ", cargo=" + cargo + ", shippingDate=" + shippingDate + ", fromLocation=" + fromLocation + ", destination=" + destination + '}';
+        return "Delivery{" + "id=" + id + ", truck=" + truck + ", cargo=" + cargoList + ", shippingDate=" + shippingDate + ", fromLocation=" + fromLocation + ", destination=" + destination + '}';
     }
 
 }
