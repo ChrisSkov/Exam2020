@@ -612,10 +612,12 @@ public class DeliveryFacade implements DeliveryFacadeInterface {
             t1 = new Truck("CarlsbergTruck", "Nok til en eftermiddag");
             t2 = new Truck("TuborgTruck", "Omkring 20 kasser");
             t3 = new Truck("TurboTruck", "En lænestol, 2 kasser bajer og et fjernsyn");
-
-            de1 = new Delivery(t1, "1-1-1920", "Lyngby", "Månen");
-            de2 = new Delivery(t2, "1-2-1921", "København", "Hellerup");
-            de3 = new Delivery(t3, "20-1-3011", "Jylland", "Grøndland");
+            List<Cargo> cargoList1 = new ArrayList();
+            List<Cargo> cargoList2 = new ArrayList();
+            List<Cargo> cargoList3 = new ArrayList();
+            de1 = new Delivery(t1,cargoList1, "1-1-1920", "Lyngby", "Månen");
+            de2 = new Delivery(t2,cargoList2,"1-2-1921", "København", "Hellerup");
+            de3 = new Delivery(t3,cargoList3, "20-1-3011", "Jylland", "Grøndland");
 
             c1 = new Cargo("Carlsberg", "33cl", "9001");
             c2 = new Cargo("Tuborg", "33cl", "3");
