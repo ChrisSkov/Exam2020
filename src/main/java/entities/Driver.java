@@ -27,6 +27,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries(
         {
             @NamedQuery(name = "Driver.getAll", query = "SELECT d FROM Driver d"),
+            @NamedQuery(name = "Driver.deleteAllRows", query = "DELETE FROM Driver"),
             @NamedQuery(name = "Driver.getDriverByName", query = "SELECT d FROM Driver d WHERE d.name = :name"),
             @NamedQuery(name = "Driver.getDriverByTruck", query = "SELECT d FROM Driver d JOIN d.truckList t WHERE t.name = :name"),
             @NamedQuery(name = "Driver.getDriverByID", query = "SELECT d FROM Driver d WHERE d.id = :id")
@@ -42,10 +43,10 @@ public class Driver implements Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Truck> truckList;
 
-    public Driver(String name, List<Truck> trucks)
+    public Driver(String name/*,List<Truck> trucks*/)
     {
         this.name = name;
-        this.truckList = trucks;
+        //this.truckList = trucks;
     }
 
     public Driver(DriverDTO driver)

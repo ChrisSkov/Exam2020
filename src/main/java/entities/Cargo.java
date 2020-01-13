@@ -25,7 +25,9 @@ import javax.persistence.NamedQuery;
 @NamedQueries(
         {
             @NamedQuery(name = "Cargo.getAll", query = "SELECT c FROM Cargo c"),
-            @NamedQuery(name = "Cargo.getCargoByName", query = "SELECT c FROM Cargo c WHERE c.name =:name")
+            @NamedQuery(name = "Cargo.getCargoByName", query = "SELECT c FROM Cargo c WHERE c.name =:name"),
+            @NamedQuery(name = "Cargo.deleteAllRows", query = "DELETE FROM Cargo")
+
         })
 public class Cargo implements Serializable {
 
@@ -41,9 +43,9 @@ public class Cargo implements Serializable {
     {
     }
 
-    public Cargo(Delivery delivery, String name, String weight, String units)
+    public Cargo(/*Delivery delivery,*/ String name, String weight, String units)
     {
-        this.delivery = delivery;
+        //this.delivery = delivery;
         this.name = name;
         this.weight = weight;
         this.units = units;

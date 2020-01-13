@@ -12,7 +12,9 @@ import DTO.TruckDTO;
 import entities.Cargo;
 import entities.Delivery;
 import entities.Driver;
+import entities.Role;
 import entities.Truck;
+import entities.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityExistsException;
@@ -573,4 +575,110 @@ public class DeliveryFacade implements DeliveryFacadeInterface {
         }
     }
 
+    public boolean populate()
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            em.createNamedQuery("Driver.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Truck.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Delivery.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Cargo.deleteAllRows").executeUpdate();
+            em.createNamedQuery("User.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Role.deleteAllRows").executeUpdate();
+            em.getTransaction().commit();
+
+            em.getTransaction().begin();
+
+            Driver d1;
+            Driver d2;
+            Driver d3;
+            Truck t1;
+            Truck t2;
+            Truck t3;
+            Delivery de1;
+            Delivery de2;
+            Delivery de3;
+            Cargo c1;
+            Cargo c2;
+            Cargo c3;
+            Cargo c4;
+
+            d1 = new Driver("Kurt");
+            d2 = new Driver("Driver2");
+            d3 = new Driver("Driver3");
+
+            t1 = new Truck("CarlsbergTruck", "Nok til en eftermiddag");
+            t2 = new Truck("TuborgTruck", "Omkring 20 kasser");
+            t3 = new Truck("TurboTruck", "En lænestol, 2 kasser bajer og et fjernsyn");
+
+            de1 = new Delivery(t1, "1-1-1920", "Lyngby", "Månen");
+            de2 = new Delivery(t2, "1-2-1921", "København", "Hellerup");
+            de3 = new Delivery(t3, "20-1-3011", "Jylland", "Grøndland");
+
+            c1 = new Cargo("Carlsberg", "33cl", "9001");
+            c2 = new Cargo("Tuborg", "33cl", "3");
+            c3 = new Cargo("JavaScript for dummies", "2kg", "700");
+            c4 = new Cargo("Skallerne fra pistachenødder", "1kg", "7040");
+
+            de1.addCargo(c1);
+            de1.addCargo(c2);
+            de2.addCargo(c2);
+            de2.addCargo(c3);
+            de3.addCargo(c1);
+            de3.addCargo(c4);
+
+            t1.addDriver(d1);
+            t2.addDriver(d2);
+            t3.addDriver(d3);
+
+            Role userRole = new Role("user");
+            Role adminRole = new Role("admin");
+            User user = new User("user", "test");
+            user.addRole(userRole);
+            User admin = new User("admin", "test");
+            admin.addRole(adminRole);
+            User both = new User("user_admin", "test");
+            both.addRole(userRole);
+            both.addRole(adminRole);
+            User nobody = new User("nobody", "test"); //no role connected
+            em.persist(userRole);
+            em.persist(adminRole);
+            em.persist(user);
+            em.persist(admin);
+            em.persist(both);
+            em.persist(nobody);
+            System.out.println("Saved test data to database");
+
+            em.persist(d1);
+            em.persist(d2);
+            em.persist(d3);
+            em.persist(de1);
+            em.persist(de2);
+            em.persist(de3);
+            em.persist(c1);
+            em.persist(c2);
+            em.persist(c3);
+            em.persist(c4);
+            em.persist(t1);
+            em.persist(t2);
+            em.persist(t3);
+            em.getTransaction().commit();
+            return true;
+        }
+        catch (Exception e)
+        {
+            System.out.println("hmmmmmmmmm");
+            e.printStackTrace();
+            System.out.println("hmmmmm...");
+            em.getTransaction().rollback();
+            return false;
+        } finally
+        {
+            em.close();
+        }
+    }
 }
+
+

@@ -5,8 +5,10 @@
  */
 package entities;
 
+import DTO.DeliveryDTO;
 import DTO.TruckDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -27,10 +29,12 @@ import javax.persistence.OneToMany;
 @NamedQueries(
         {
             @NamedQuery(name = "Truck.getAll", query = "SELECT t FROM Truck t"),
+            @NamedQuery(name = "Truck.deleteAllRows", query = "DELETE FROM Truck"),
             @NamedQuery(name = "Truck.getTruckByName", query = "SELECT t FROM Truck t WHERE t.name = :name"),
             @NamedQuery(name = "Truck.getTruckByDriver", query = "SELECT t FROM Truck t JOIN t.drivers d WHERE d.name = :name"),
             @NamedQuery(name = "Truck.getTruckByID", query = "SELECT t FROM Truck t WHERE t.id = :id"),
             @NamedQuery(name = "Truck.getTruckByShippingDate", query = "SELECT t FROM Truck t JOIN t.deliveries d WHERE d.shippingDate = :shippingDate")
+
         })
 public class Truck implements Serializable {
 
@@ -41,17 +45,17 @@ public class Truck implements Serializable {
     private Integer id;
     private String name, capacity;
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "trucks")
-    private List<Driver> drivers;
+    private List<Driver> drivers = new ArrayList();
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Delivery> deliveries;
+    private List<Delivery> deliveries = new ArrayList();
 
-    public Truck(String name, String capacity, List<Driver> drivers, List<Delivery> deliveries)
+    public Truck(String name, String capacity/*, List<Driver> drivers, List<Delivery> deliveries*/)
     {
         this.name = name;
         this.capacity = capacity;
-        this.drivers = drivers;
-        this.deliveries = deliveries;
+        // this.drivers = drivers;
+        //this.deliveries = deliveries;
     }
 
     public Truck(TruckDTO truck)
@@ -63,6 +67,15 @@ public class Truck implements Serializable {
         {
             drivers.add(new Driver(d));
         });
+        for (DeliveryDTO delivery : truck.getDeliveryList())
+        {
+            deliveries.add(new Delivery(delivery));
+        }
+    }
+
+    public void addDriver(Driver driver)
+    {
+        this.drivers.add(driver);
     }
 
     public Truck()
@@ -122,12 +135,12 @@ public class Truck implements Serializable {
     @Override
     public int hashCode()
     {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.capacity);
-        hash = 53 * hash + Objects.hashCode(this.drivers);
-        hash = 53 * hash + Objects.hashCode(this.deliveries);
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 11 * hash + Objects.hashCode(this.name);
+        hash = 11 * hash + Objects.hashCode(this.capacity);
+        hash = 11 * hash + Objects.hashCode(this.drivers);
+        hash = 11 * hash + Objects.hashCode(this.deliveries);
         return hash;
     }
 

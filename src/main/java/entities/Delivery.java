@@ -28,11 +28,12 @@ import javax.persistence.NamedQuery;
 @NamedQueries(
         {
             @NamedQuery(name = "Delivery.getAll", query = "SELECT d FROM Delivery d"),
+            @NamedQuery(name = "Delivery.deleteAllRows", query = "DELETE FROM Delivery"),
             @NamedQuery(name = "Delivery.getDeliveryByTruck", query = "SELECT d FROM Delivery d JOIN d.truck t WHERE t.name =:name"),
             @NamedQuery(name = "Delivery.getDeliveryByDate", query = "SELECT d FROM Delivery d WHERE d.shippingDate = :shippingDate"),
             @NamedQuery(name = "Delivery.getDeliveryByFromLocation", query = "SELECT d FROM Delivery d WHERE d.fromLocation = :fromLocation"),
             @NamedQuery(name = "Delivery.getDeliveryByDestination", query = "SELECT d FROM Delivery d WHERE d.destination = :destination"),
-            @NamedQuery(name = "Delivery.getDeliveryByCargo", query = "SELECT d FROM Delivery d WHERE d.cargo = :cargo")
+            @NamedQuery(name = "Delivery.getDeliveryByCargo", query = "SELECT d FROM Delivery d WHERE d.cargoList = :cargo")
 
         })
 public class Delivery implements Serializable {
@@ -52,28 +53,34 @@ public class Delivery implements Serializable {
     {
     }
 
-    public Delivery(Truck truck, List<Cargo> cargo, String shippingDate, String fromLocation, String destination)
+    public Delivery(Truck truck/*, List<Cargo> cargo*/, String shippingDate, String fromLocation, String destination)
     {
         this.truck = truck;
-        this.cargoList = cargo;
+      //  this.cargoList = cargo;
         this.shippingDate = shippingDate;
         this.fromLocation = fromLocation;
         this.destination = destination;
     }
 
-      public Delivery(DeliveryDTO delivery)
+    public Delivery(DeliveryDTO delivery)
     {
         this.id = delivery.getId();
         this.truck = delivery.getTruck();
         this.shippingDate = delivery.getShippingDate();
         this.fromLocation = delivery.getFromLocation();
         this.destination = delivery.getDestination();
-       for(CargoDTO cargo : delivery.getCargoList())
+        for (CargoDTO cargo : delivery.getCargoList())
         {
             cargoList.add(new Cargo(cargo));
-            
+
         }
     }
+
+    public void addCargo(Cargo cargo)
+    {
+        this.cargoList.add(cargo);
+    }
+
     public Integer getId()
     {
         return id;

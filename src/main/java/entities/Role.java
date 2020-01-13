@@ -19,6 +19,10 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "roles")
+@NamedQueries(
+{
+    @NamedQuery(name = "Role.deleteAllRows", query = "DELETE FROM Role")
+})
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,32 +31,37 @@ public class Role implements Serializable {
     @NotNull
     @Column(name = "role_name", length = 20)
     private String roleName;
-    
+
     @ManyToMany(mappedBy = "roleList")
     private List<User> userList;
 
-    public Role() {
+    public Role()
+    {
     }
 
-    public Role(String roleName) {
+    public Role(String roleName)
+    {
         this.roleName = roleName;
     }
 
-    public String getRoleName() {
+    public String getRoleName()
+    {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(String roleName)
+    {
         this.roleName = roleName;
     }
 
-    public List<User> getUserList() {
+    public List<User> getUserList()
+    {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(List<User> userList)
+    {
         this.userList = userList;
     }
 
-    
 }

@@ -5,6 +5,7 @@
  */
 package DTO;
 
+import entities.Delivery;
 import entities.Truck;
 import java.util.List;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class TruckDTO {
     private String name, capacity;
 
     private List<DriverDTO> driverList = new ArrayList();
+    private List<DeliveryDTO> deliveryList = new ArrayList();
 
     public TruckDTO(Truck truck)
     {
@@ -30,10 +32,24 @@ public class TruckDTO {
         {
             driverList.add(new DriverDTO(d));
         });
+        for (Delivery delivery : truck.getDeliveries())
+        {
+            deliveryList.add(new DeliveryDTO(delivery));
+        }
     }
 
     public TruckDTO()
     {
+    }
+
+    public List<DeliveryDTO> getDeliveryList()
+    {
+        return deliveryList;
+    }
+
+    public void setDeliveryList(List<DeliveryDTO> deliveryList)
+    {
+        this.deliveryList = deliveryList;
     }
 
     public void addDriverDTO(DriverDTO d)
@@ -133,4 +149,8 @@ public class TruckDTO {
         return "TruckDTO{" + "id=" + id + ", name=" + name + ", capacity=" + capacity + ", driverList=" + driverList + '}';
     }
 
+    /* public Iterable<DeliveryDTO> getDeliveries()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
 }

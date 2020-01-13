@@ -39,6 +39,8 @@ public class DeliveryDTO {
         });
     }
 
+  
+
     public Truck getTruck()
     {
         return truck;
