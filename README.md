@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/ChrisSkov/Exam2020.svg?branch=master)](https://travis-ci.org/ChrisSkov/ca3back)
-Back end code for to use as start code for future shitty projects. 
+Back end code to use as start code for future shitty projects. 
 
 To makes this work follow these steps:
 
