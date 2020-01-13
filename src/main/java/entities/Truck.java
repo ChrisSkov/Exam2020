@@ -27,7 +27,7 @@ import javax.persistence.OneToMany;
 {
     @NamedQuery(name = "Truck.getAll", query = "SELECT t FROM Truck t"),
     @NamedQuery(name = "Truck.getTruckByName", query = "SELECT t FROM Truck t WHERE t.name = :name"),
-    @NamedQuery(name = "Truck.getTrcukByDriver", query = "SELECT t FROM Truck t JOIN t.drivers d WHERE d.name :name"),
+    @NamedQuery(name = "Truck.getTrcukByDriver", query = "SELECT t FROM Truck t JOIN t.drivers d WHERE d.name = :name"),
     @NamedQuery(name = "Truck.getTruckByID", query = "SELECT t FROM Truck t WHERE t.id = :id"),
     @NamedQuery(name = "Truck.getTruckByShippingDate", query = "SELECT t FROM Truck t JOIN t.deliveries d WHERE d.shippingDate = :shippingDate")
 })
