@@ -6,7 +6,7 @@ import {
   Switch
 } from "react-router-dom";
 import facade from "./apiFacade";
-import DND from "./components/DND";
+import DND from "./components/Driver";
 import Home from "./components/Home";
 
 class LogIn extends Component {
@@ -121,8 +121,8 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" to="/DND">
-          Dungeons and Dragons
+        <NavLink activeClassName="active" to="/Driver">
+          Drivers
         </NavLink>
       </li>
     </ul>
@@ -136,7 +136,7 @@ const Content = () => {
         {" "}
         <Home />{" "}
       </Route>
-      <Route path="/DND">
+      <Route path="/Driver">
         {" "}
         <DND />{" "}
       </Route>

@@ -36,7 +36,7 @@ import javax.persistence.Table;
             @NamedQuery(name = "Truck.getTruckByName", query = "SELECT t FROM Truck t WHERE t.name = :name"),
             @NamedQuery(name = "Truck.getTruckByDriver", query = "SELECT t FROM Truck t JOIN t.drivers d WHERE d.name = :name"),
             @NamedQuery(name = "Truck.getTruckByID", query = "SELECT t FROM Truck t WHERE t.id = :id"),
-            @NamedQuery(name = "Truck.getTruckByShippingDate", query = "SELECT t FROM Truck t JOIN t.deliveries d WHERE d.shippingDate = :shippingDate")
+          //  @NamedQuery(name = "Truck.getTruckByShippingDate", query = "SELECT t FROM Truck t JOIN t.deliveries d WHERE d.shippingDate = :shippingDate")
 
         })
 public class Truck implements Serializable {
@@ -50,7 +50,7 @@ public class Truck implements Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Driver> drivers = new ArrayList();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     private List<Delivery> deliveries = new ArrayList();
 
     public Truck()

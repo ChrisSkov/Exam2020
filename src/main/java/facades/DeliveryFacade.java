@@ -582,8 +582,8 @@ public class DeliveryFacade implements DeliveryFacadeInterface {
         {
             em.getTransaction().begin();
             em.createNamedQuery("Driver.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Truck.deleteAllRows").executeUpdate();
             em.createNamedQuery("Delivery.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Truck.deleteAllRows").executeUpdate();
             em.createNamedQuery("Cargo.deleteAllRows").executeUpdate();
             em.createNamedQuery("User.deleteAllRows").executeUpdate();
             em.createNamedQuery("Role.deleteAllRows").executeUpdate();
