@@ -50,6 +50,10 @@ public class Truck implements Serializable {
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<Delivery> deliveries = new ArrayList();
 
+    public Truck()
+    {
+    }
+
     public Truck(String name, String capacity/*, List<Driver> drivers, List<Delivery> deliveries*/)
     {
         this.name = name;
@@ -76,10 +80,6 @@ public class Truck implements Serializable {
     public void addDriver(Driver driver)
     {
         this.drivers.add(driver);
-    }
-
-    public Truck()
-    {
     }
 
     public Integer getId()

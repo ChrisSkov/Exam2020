@@ -56,7 +56,7 @@ public class Delivery implements Serializable {
     public Delivery(Truck truck/*, List<Cargo> cargo*/, String shippingDate, String fromLocation, String destination)
     {
         this.truck = truck;
-      //  this.cargoList = cargo;
+        //  this.cargoList = cargo;
         this.shippingDate = shippingDate;
         this.fromLocation = fromLocation;
         this.destination = destination;

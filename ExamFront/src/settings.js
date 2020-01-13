@@ -1,5 +1,5 @@
 export const localURL =
   process.env.NODE_ENV !== "production"
-    ? "https://goinghamdev.com/CA3"
+    ? "http://localhost:8080/exam"
     : "digitaloceanserver";
 export const DNDList = "/api/info/AllSpells/";
