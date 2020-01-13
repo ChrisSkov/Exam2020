@@ -47,7 +47,7 @@ public class Truck implements Serializable {
 
     private Integer id;
     private String name, capacity;
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "trucks")
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Driver> drivers = new ArrayList();
 
     @OneToMany(cascade = CascadeType.PERSIST)
