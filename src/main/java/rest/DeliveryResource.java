@@ -6,13 +6,16 @@
 package rest;
 
 import DTO.DriverDTO;
+import DTO.TruckDTO;
 import utils.EMF_Creator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import facades.DeliveryFacade;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -57,8 +60,95 @@ public class DeliveryResource {
     @Path("driver/{name}")
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
-    public DriverDTO getDriverByName(@PathParam("name") String name) {
+    public DriverDTO getDriverByName(@PathParam("name") String name)
+    {
         return FACADE.getDriverByName(name);
     }
     
+    @GET
+    @Path("whodrives/{name}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin", "user"})
+    public DriverDTO getDriverByTruck(@PathParam("name") String name)
+    {
+        return FACADE.getDriverByTruck(name);
+    }
+    
+    @PUT
+    @Path("admin/driver/add")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+     public DriverDTO adminAddDriver(DriverDTO driver)
+     {
+         return FACADE.adminAddDriver(driver);
+     }
+     
+    @PUT
+    @Path("admin/driver/edit")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+      public DriverDTO adminEditDriver(DriverDTO driver)
+      {
+          return FACADE.adminEditDriver(driver);
+      }
+    
+    @PUT
+    @Path("admin/driver/delete/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+    public DriverDTO adminDeleteDriver(@PathParam("id") int id)
+    {
+          return FACADE.adminDeleteDriver(id);
+    }
+    
+    @GET
+    @Path("truck/{name}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin", "user"})
+    public TruckDTO getTruckByName(@PathParam("name")String name)
+    {
+        return FACADE.getTruckByName(name);
+    }
+    
+    @GET
+    @Path("truckDriver/{name}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin", "user"})
+    public TruckDTO getTruckByDriver(@PathParam("name")String name)
+    {
+        return FACADE.getTruckByDriver(name);
+    }
+    
+    @PUT
+    @Path("admin/truck/add")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+    public TruckDTO adminAddTruck(TruckDTO truck)
+    {
+        return FACADE.adminAddTruck(truck);
+    }
+    
+    @PUT
+    @Path("admin/truck/edit")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+     public TruckDTO adminEditTruck(TruckDTO truck)
+     {
+         return FACADE.adminEditTruck(truck);
+     }
+     
+    @PUT
+    @Path("admin/truck/delete/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+    public TruckDTO adminDeleteTruck(@PathParam("id")int id)
+     {
+         return FACADE.adminDeleteTruck(id);
+     }
 }
