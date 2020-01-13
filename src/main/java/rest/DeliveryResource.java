@@ -5,12 +5,15 @@
  */
 package rest;
 
+import DTO.CargoDTO;
+import DTO.DeliveryDTO;
 import DTO.DriverDTO;
 import DTO.TruckDTO;
 import utils.EMF_Creator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import facades.DeliveryFacade;
+import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -48,13 +51,13 @@ public class DeliveryResource {
     }
 
     @GET
-    @Path("id/{id}")
+    @Path("driver/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
-    public DriverDTO getDriverByID(@PathParam("id") int id)
-    {
-        return FACADE.getDriverByID(id);
-    }
+       public DriverDTO getDriverByID(@PathParam("id")int id)
+       {
+           return FACADE.getDriverByID(id);
+       }
     
     @GET
     @Path("driver/{name}")
@@ -151,4 +154,97 @@ public class DeliveryResource {
      {
          return FACADE.adminDeleteTruck(id);
      }
+    
+    
+    @PUT
+    @Path("admin/delivery/add")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+    public DeliveryDTO adminAddDelivery(DeliveryDTO delivery)
+    {
+        return FACADE.adminAddDelivery(delivery);
+    }
+    
+    @PUT
+    @Path("admin/delivery/edit")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+     public DeliveryDTO adminEditDelivery(DeliveryDTO delivery)
+     {
+         return FACADE.adminEditDelivery(delivery);
+     }
+    
+    @PUT
+    @Path("admin/delivery/delete/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+     public DeliveryDTO adminDeleteDelivery(@PathParam("id")int id)
+     {
+         return FACADE.adminDeleteDelivery(id);
+     }
+     
+    @PUT
+    @Path("admin/cargo/add")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+     public CargoDTO adminAddCargo(CargoDTO cargo)
+     {
+         return FACADE.adminAddCargo(cargo);
+     }
+     
+    @PUT
+    @Path("admin/cargo/edit")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+     public CargoDTO adminEditCargo(CargoDTO cargo)
+     {
+         return FACADE.adminEditCargo(cargo);
+     }
+     
+    @PUT
+    @Path("admin/cargo/delete/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin"})
+     public CargoDTO adminDeleteCargo(@PathParam("id")int id)
+     {
+         return FACADE.adminDeleteCargo(id);
+     }
+     
+    @GET
+    @Path("driver/all")
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin", "user"})
+     public List<DriverDTO> getAllDrivers()
+     {
+         return FACADE.getAllDrivers();
+     }
+     
+    @GET
+    @Path("driver/all")
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"admin", "user"})
+      public List<TruckDTO> getAllTrucks()
+      {
+          return FACADE.getAllTrucks();
+      }
+      
+    @GET
+    @Path("populate")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String populateDatabase() {
+
+        boolean success = FACADE.populate();
+
+        if (success) {
+            return "{\"message\":\"Database has been populated\"}";
+        } else {
+            return "{\"message\":\"Failed to populate database. feelsbadman\"}";
+        }
+    }
 }
