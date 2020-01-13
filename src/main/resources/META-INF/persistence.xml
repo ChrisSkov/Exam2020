@@ -7,6 +7,8 @@
     <class>entities.Role</class>
     <class>entities.Driver</class>
     <class>entities.Truck</class>
+    <class>entities.Delivery</class>
+    <class>entities.Cargo</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- DO NOT remove the line below. It's not set by the  entityUtils.EMF_Creator -->

@@ -27,7 +27,7 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "Driver.getAll", query = "SELECT d FROM Driver d"),
     @NamedQuery(name = "Driver.getDriverByName", query = "SELECT d FROM Driver d WHERE d.name = :name"),
     @NamedQuery(name = "Driver.getDriverByTrcuk", query = "SELECT d FROM Driver d JOIN d.trucks t WHERE t.name = :name"),
-    @NamedQuery(name = "Driver.getDriverByID", query = "SELECT d FROM Driver d WHERE d.id = :id"),
+    @NamedQuery(name = "Driver.getDriverByID", query = "SELECT d FROM Driver d WHERE d.id = :id")
 })
 public class Driver implements Serializable {
 

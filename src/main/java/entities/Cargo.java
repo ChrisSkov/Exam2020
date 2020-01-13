@@ -13,19 +13,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Chris
  */
 @Entity
+@NamedQueries(
+        {
+            @NamedQuery(name = "Cargo.getAll", query = "SELECT c FROM Cargo c"),
+            @NamedQuery(name = "Cargo.getCargoByName", query = "SELECT c FROM Cargo c WHERE c.name =:name")
+        })
 public class Cargo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne( cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Delivery delivery;
     private String name, weight, units;
 
@@ -41,7 +48,6 @@ public class Cargo implements Serializable {
         this.units = units;
     }
 
-    
     public Integer getId()
     {
         return id;
@@ -149,5 +155,4 @@ public class Cargo implements Serializable {
         return "Cargo{" + "id=" + id + ", delivery=" + delivery + ", name=" + name + ", weight=" + weight + ", units=" + units + '}';
     }
 
-    
 }

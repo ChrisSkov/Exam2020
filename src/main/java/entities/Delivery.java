@@ -15,22 +15,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Chris
  */
 @Entity
+@NamedQueries(
+{
+    @NamedQuery(name = "Delivery.getAll", query = "SELECT d FROM Delivery d"),
+    @NamedQuery(name = "Delivery.getDeliveryByTruck", query = "SELECT d FROM Delivery d JOIN d.truck t WHERE t.name =:name"),
+    @NamedQuery(name = "Delivery.getDeliveryByDate", query = "SELECT d FROM Delivery d WHERE d.shippingDate = :shippingDate"),
+    @NamedQuery(name = "Delivery.getDeliveryByFromLocation", query = "SELECT d FROM Delivery d WHERE d.fromLocation = :fromLocation"),
+    @NamedQuery(name = "Delivery.getDeliveryByDestination", query = "SELECT d FROM Delivery d WHERE d.destination = :destination"),
+    @NamedQuery(name = "Delivery.getDeliveryByCargo", query = "SELECT d FROM Delivery d WHERE d.cargo = :cargo")
+    
+})
 public class Delivery implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne( cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Truck truck;
-    @OneToMany( cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Cargo> cargo;
+    
     private String shippingDate, fromLocation, destination;
 
     public Delivery()
@@ -46,8 +59,6 @@ public class Delivery implements Serializable {
         this.destination = destination;
     }
 
-    
-    
     public Integer getId()
     {
         return id;
@@ -108,7 +119,6 @@ public class Delivery implements Serializable {
         this.destination = destination;
     }
 
-    
     @Override
     public int hashCode()
     {
@@ -171,6 +181,4 @@ public class Delivery implements Serializable {
         return "Delivery{" + "id=" + id + ", truck=" + truck + ", cargo=" + cargo + ", shippingDate=" + shippingDate + ", fromLocation=" + fromLocation + ", destination=" + destination + '}';
     }
 
-
-    
 }
