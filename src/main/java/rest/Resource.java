@@ -5,6 +5,12 @@
  */
 package rest;
 
+/**
+ *
+ * @author Chris
+ */
+
+
 import DTO.CargoDTO;
 import DTO.DeliveryDTO;
 import DTO.DriverDTO;
@@ -25,20 +31,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.core.UriInfo;
+//import javax.ws.rs.core.UriInfo;
 
 /**
  *
  * @author Chris
  */
 @Path("deliver")
-public class DeliveryResource {
+public class Resource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private static final DeliveryFacade FACADE = DeliveryFacade.getDeliveryFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    @Context
-    private UriInfo context;
+   // @Context
+   // private UriInfo context;
 
     @Context
     SecurityContext securityContext;
