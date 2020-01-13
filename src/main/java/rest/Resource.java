@@ -58,6 +58,7 @@ public class Resource {
 
     @GET
     @Path("driver/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
        public DriverDTO getDriverByID(@PathParam("id")int id)
@@ -67,6 +68,7 @@ public class Resource {
     
     @GET
     @Path("driver/{name}")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
     public DriverDTO getDriverByName(@PathParam("name") String name)
@@ -76,6 +78,7 @@ public class Resource {
     
     @GET
     @Path("whodrives/{name}")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
     public DriverDTO getDriverByTruck(@PathParam("name") String name)
@@ -105,7 +108,7 @@ public class Resource {
     
     @PUT
     @Path("admin/driver/delete/{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
+   // @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin"})
     public DriverDTO adminDeleteDriver(@PathParam("id") int id)
@@ -115,6 +118,7 @@ public class Resource {
     
     @GET
     @Path("truck/{name}")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
     public TruckDTO getTruckByName(@PathParam("name")String name)
@@ -124,6 +128,7 @@ public class Resource {
     
     @GET
     @Path("truckDriver/{name}")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
     public TruckDTO getTruckByDriver(@PathParam("name")String name)
@@ -224,6 +229,7 @@ public class Resource {
      
     @GET
     @Path("driver/all")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
      public List<DriverDTO> getAllDrivers()
@@ -232,7 +238,8 @@ public class Resource {
      }
      
     @GET
-    @Path("driver/all")
+    @Path("drivers/all")
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"admin", "user"})
       public List<TruckDTO> getAllTrucks()
