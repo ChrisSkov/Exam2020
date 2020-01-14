@@ -1,6 +1,6 @@
 import { Deliver } from "./settings";
 
-const URL = "https://goinghamdev.com/Exam2020";
+const URL = "https://goinghamdev.com/Exam2020/";
 function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
