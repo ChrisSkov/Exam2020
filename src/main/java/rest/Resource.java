@@ -33,7 +33,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
-//import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -45,8 +45,8 @@ public class Resource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private static final DeliveryFacade FACADE = DeliveryFacade.getDeliveryFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-   // @Context
-   // private UriInfo context;
+    @Context
+    private UriInfo context;
 
     @Context
     SecurityContext securityContext;
@@ -61,7 +61,7 @@ public class Resource {
     @GET
     @Path("driver/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin", "user"})
+   // @RolesAllowed({"admin", "user"})
        public DriverDTO getDriverByID(@PathParam("id")int id)
        {
            return FACADE.getDriverByID(id);
@@ -71,7 +71,7 @@ public class Resource {
     @Path("driver/{name}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin", "user"})
+  //  @RolesAllowed({"admin", "user"})
     public DriverDTO getDriverByName(@PathParam("name") String name)
     {
         return FACADE.getDriverByName(name);
@@ -81,7 +81,7 @@ public class Resource {
     @Path("whodrives/{name}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin", "user"})
+   // @RolesAllowed({"admin", "user"})
     public DriverDTO getDriverByTruck(@PathParam("name") String name)
     {
         return FACADE.getDriverByTruck(name);
@@ -91,7 +91,7 @@ public class Resource {
     @Path("admin/driver/add")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+  //  @RolesAllowed({"admin"})
      public DriverDTO adminAddDriver(DriverDTO driver)
      {
          return FACADE.adminAddDriver(driver);
@@ -101,7 +101,7 @@ public class Resource {
     @Path("admin/driver/edit")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+  //  @RolesAllowed({"admin"})
       public DriverDTO adminEditDriver(DriverDTO driver)
       {
           return FACADE.adminEditDriver(driver);
@@ -110,7 +110,7 @@ public class Resource {
     @DELETE
     @Path("admin/driver/delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
     public DriverDTO adminDeleteDriver(@PathParam("id") int id)
     {
           return FACADE.adminDeleteDriver(id);
@@ -120,7 +120,7 @@ public class Resource {
     @Path("truck/{name}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin", "user"})
+   // @RolesAllowed({"admin", "user"})
     public TruckDTO getTruckByName(@PathParam("name")String name)
     {
         return FACADE.getTruckByName(name);
@@ -130,7 +130,7 @@ public class Resource {
     @Path("truckDriver/{name}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin", "user"})
+   // @RolesAllowed({"admin", "user"})
     public TruckDTO getTruckByDriver(@PathParam("name")String name)
     {
         return FACADE.getTruckByDriver(name);
@@ -140,7 +140,7 @@ public class Resource {
     @Path("admin/truck/add")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
     public TruckDTO adminAddTruck(TruckDTO truck)
     {
         return FACADE.adminAddTruck(truck);
@@ -150,7 +150,7 @@ public class Resource {
     @Path("admin/truck/edit")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
      public TruckDTO adminEditTruck(TruckDTO truck)
      {
          return FACADE.adminEditTruck(truck);
@@ -159,7 +159,7 @@ public class Resource {
     @DELETE
     @Path("admin/truck/delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
     public TruckDTO adminDeleteTruck(@PathParam("id")int id)
      {
          return FACADE.adminDeleteTruck(id);
@@ -170,7 +170,7 @@ public class Resource {
     @Path("admin/delivery/add")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+  //  @RolesAllowed({"admin"})
     public DeliveryDTO adminAddDelivery(DeliveryDTO delivery)
     {
         return FACADE.adminAddDelivery(delivery);
@@ -180,7 +180,7 @@ public class Resource {
     @Path("admin/delivery/edit")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
      public DeliveryDTO adminEditDelivery(DeliveryDTO delivery)
      {
          return FACADE.adminEditDelivery(delivery);
@@ -189,7 +189,7 @@ public class Resource {
     @DELETE
     @Path("admin/delivery/delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+    //@RolesAllowed({"admin"})
      public DeliveryDTO adminDeleteDelivery(@PathParam("id")int id)
      {
          return FACADE.adminDeleteDelivery(id);
@@ -199,7 +199,7 @@ public class Resource {
     @Path("admin/cargo/add")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
      public CargoDTO adminAddCargo(CargoDTO cargo)
      {
          return FACADE.adminAddCargo(cargo);
@@ -209,7 +209,7 @@ public class Resource {
     @Path("admin/cargo/edit")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+  //  @RolesAllowed({"admin"})
      public CargoDTO adminEditCargo(CargoDTO cargo)
      {
          return FACADE.adminEditCargo(cargo);
@@ -218,7 +218,7 @@ public class Resource {
     @DELETE
     @Path("admin/cargo/delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin"})
+   // @RolesAllowed({"admin"})
      public CargoDTO adminDeleteCargo(@PathParam("id")int id)
      {
          return FACADE.adminDeleteCargo(id);
@@ -227,7 +227,7 @@ public class Resource {
     @GET
     @Path("driver/all")
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin", "user"})
+   // @RolesAllowed({"admin", "user"})
      public List<DriverDTO> getAllDrivers()
      {
          return FACADE.getAllDrivers();
@@ -236,7 +236,7 @@ public class Resource {
     @GET
     @Path("truck/all")
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"admin", "user"})
+   // @RolesAllowed({"admin", "user"})
       public List<TruckDTO> getAllTrucks()
       {
           return FACADE.getAllTrucks();
