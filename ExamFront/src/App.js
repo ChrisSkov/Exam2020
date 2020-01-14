@@ -25,9 +25,10 @@ class LogIn extends Component {
     return (
       <div>
         <h2>Login</h2>
+        <h3>Enter placeholer values in fields to access site. Or don't. It's all good</h3>
         <form onSubmit={this.login} onChange={this.onChange}>
-          <input placeholder="User Name" id="username" />
-          <input placeholder="Password" id="password" />
+          <input placeholder="user" id="username" />
+          <input placeholder="test" id="password" />
           <button>Login</button>
         </form>
       </div>

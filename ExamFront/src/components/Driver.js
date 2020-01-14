@@ -36,7 +36,7 @@ export default function LoggedIn() {
   const [id, setId] = useState("");
 
   useEffect(() => {
-    facade.fetchSpell(id).then(res => setData(res));
+    facade.fetchData(id).then(res => setData(res));
     //facade.fetchData().then(res => setData(res));
   }, [id]);
 
@@ -52,7 +52,9 @@ export default function LoggedIn() {
           value={id}
         />
       </div>
+      d
       {id !== "" && <JSONPretty id="json-pretty" data={data}></JSONPretty>}
+      <p>{data.first_line}</p>
     </div>
   );
 }

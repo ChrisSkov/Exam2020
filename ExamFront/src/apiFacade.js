@@ -1,6 +1,6 @@
 import { Deliver } from "./settings";
 
-const URL = "http://localhost:8080/exam";
+const URL = "https://goinghamdev.com/Exam2020";
 function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
@@ -56,7 +56,7 @@ class ApiFacade {
     return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
   };
 
-  fetchSpell = id => {
+  fetchData = id => {
     const options = this.makeOptions("GET", false);
     return fetch(URL + Deliver + id, options).then(handleHttpErrors);
   };
